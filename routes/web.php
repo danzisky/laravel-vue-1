@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +28,9 @@ Route::get('/', function () {
 
     ]);
 })->name('base');
+
+Route::resource('questions', QuestionController::class);
+Route::resource('questions.answers', AnswerController::class);
 
 Route::get('/home', function () {
     return Inertia::render('App/Home');
