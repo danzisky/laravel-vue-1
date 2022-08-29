@@ -15,7 +15,7 @@ class Question extends Model
         'peak_personality',
     ];
     
-    protected function answers() {
-        $this->hasMany(Answer::class);
+    public function answers() {
+        return $this->hasMany(Answer::class, 'question_id', 'id');
     }
 }

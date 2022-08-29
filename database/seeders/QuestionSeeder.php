@@ -20,7 +20,8 @@ class QuestionSeeder extends Seeder
         $q = Question::create([
             'question' => 'You’re really busy at work and a colleague is telling you their life story and personal woes. You:',
         ]);
-
+        $q = $q->fresh();
+        dump($q->id);
         $q->answers()->create(['answer' => 'Don’t dare to interrupt them', 'rank' => 1]);
         $q->answers()->create(['answer' => 'Think it’s more important to give them some of your time; work can wait', 'rank' => 2]);
         $q->answers()->create(['answer' => 'Listen, but with only with half an ear', 'rank' => 3]);
@@ -29,6 +30,7 @@ class QuestionSeeder extends Seeder
         $q = Question::create([
             'question' => 'You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:',
         ]);
+        $q = $q->fresh();
 
         $q->answers()->create(['answer' => 'Look at your watch every two minutes', 'rank' => 1]);
         $q->answers()->create(['answer' => 'Bubble with inner anger, but keep quiet', 'rank' => 2]);
@@ -38,7 +40,8 @@ class QuestionSeeder extends Seeder
         $q = Question::create([
             'question' => 'You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:',
         ]);
-
+        $q = $q->fresh();
+        
         $q->answers()->create(['answer' => 'Don’t dare contradict them', 'rank' => 1]);
         $q->answers()->create(['answer' => 'Think that they are obviously right', 'rank' => 2]);
         $q->answers()->create(['answer' => 'Defend your own point of view, tooth and nail', 'rank' => 3]);
@@ -47,6 +50,7 @@ class QuestionSeeder extends Seeder
         $q = Question::create([
             'question' => 'You are taking part in a guided tour of a museum. You:',
         ]);
+        $q = $q->fresh();
 
         $q->answers()->create(['answer' => 'Are a bit too far towards the back so don’t really hear what the guide is saying', 'rank' => 1]);
         $q->answers()->create(['answer' => 'Follow the group without question', 'rank' => 2]);

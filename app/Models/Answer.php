@@ -15,7 +15,7 @@ class Answer extends Model
        'rank',
     ];
 
-    protected function question() {
+    public function question() {
         return $this->belongsTo(Question::class);
     }
 }
