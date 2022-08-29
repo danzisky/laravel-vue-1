@@ -10,9 +10,12 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+       'answer',
+       'question_id',
+       'rank',
     ];
 
+    protected function question() {
+        return $this->belongsTo(Question::class);
+    }
 }

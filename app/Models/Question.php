@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'question',
+        'anchor_rank',
+        'peak_personality',
+    ];
+    
+    protected function answers() {
+        $this->hasMany(Answer::class);
+    }
 }
