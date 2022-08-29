@@ -16,17 +16,20 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-       
+        // =====================================================
+
         $q = Question::create([
             'question' => 'You’re really busy at work and a colleague is telling you their life story and personal woes. You:',
         ]);
         $q = $q->fresh();
-        dump($q->id);
+
         $q->answers()->create(['answer' => 'Don’t dare to interrupt them', 'rank' => 1]);
         $q->answers()->create(['answer' => 'Think it’s more important to give them some of your time; work can wait', 'rank' => 2]);
         $q->answers()->create(['answer' => 'Listen, but with only with half an ear', 'rank' => 3]);
         $q->answers()->create(['answer' => 'Interrupt and explain that you are really busy at the moment', 'rank' => 4]);
        
+        // =====================================================
+
         $q = Question::create([
             'question' => 'You’ve been sitting in the doctor’s waiting room for more than 25 minutes. You:',
         ]);
@@ -37,6 +40,8 @@ class QuestionSeeder extends Seeder
         $q->answers()->create(['answer' => 'Explain to other equally impatient people in the room that the doctor is always running late', 'rank' => 3]);
         $q->answers()->create(['answer' => 'Complain in a loud voice, while tapping your foot impatiently', 'rank' => 4]);
        
+        // =====================================================
+
         $q = Question::create([
             'question' => 'You’re having an animated discussion with a colleague regarding a project that you’re in charge of. You:',
         ]);
@@ -47,6 +52,8 @@ class QuestionSeeder extends Seeder
         $q->answers()->create(['answer' => 'Defend your own point of view, tooth and nail', 'rank' => 3]);
         $q->answers()->create(['answer' => 'Continuously interrupt your colleague', 'rank' => 4]);
        
+        // =====================================================
+
         $q = Question::create([
             'question' => 'You are taking part in a guided tour of a museum. You:',
         ]);
