@@ -1,14 +1,17 @@
 <template>
-    <layout>
+    <Base>
+        <Head title="Home" />
         <div class="">
-            
-        </div>        
-    </layout>
+
+        </div>
+    </Base>
 </template>
 
 <script>
+import Base from "./Base.vue"
+import { Head } from "@inertiajs/inertia-vue3";
 export default {
-
+    components: { Base }
 }
 </script>
 

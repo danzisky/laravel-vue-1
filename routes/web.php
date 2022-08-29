@@ -24,7 +24,7 @@ Route::get('/', function () {
     //     'laravelVersion' => Application::VERSION,
     //     'phpVersion' => PHP_VERSION,
     // ]);
-    return Inertia::render('App/Base',[
+    return Inertia::render('App/Home',[
 
     ]);
 })->name('base');
