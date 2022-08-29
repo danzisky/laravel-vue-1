@@ -7,7 +7,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 font-nova">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,8 +50,10 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main>
-                <slot />
+            <main class="h-full">
+                <div class="m-auto w-full h-full bg-slate-300_">
+                    <slot />
+                </div>
             </main>
         </div>
     </div>
@@ -64,5 +66,7 @@ export default {
 </script>
 
 <style>
-
+    html {
+        font-family: Proxima Nova, system-ui, sans-serif;
+    }
 </style>
