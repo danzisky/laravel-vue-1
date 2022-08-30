@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Resources\QuestionResource;
 
 class QuestionController extends Controller
 {
@@ -15,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return Question::all();
+        return QuestionResource::collection(Question::all());
     }
 
     /**
