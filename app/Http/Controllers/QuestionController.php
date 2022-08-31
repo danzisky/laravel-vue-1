@@ -48,7 +48,8 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        // return new QuestionResource(Question::findOrFail($id));
+        return new QuestionResource($question);
     }
 
     /**
