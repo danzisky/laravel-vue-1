@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import BreezeNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -24,6 +25,9 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
                                 <BreezeNavLink :href="route('base')" :active="route().current('base')">
                                     Dashboard
+                                </BreezeNavLink>
+                                <BreezeNavLink :href="route('test')" :active="route().current('test')">
+                                    Test
                                 </BreezeNavLink>
                             </div>
                         </div>
