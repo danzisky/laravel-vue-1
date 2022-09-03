@@ -29,7 +29,7 @@ export default {
     created() {
         this.fetchData()
     },
-
+    
     methods: {
         async fetchData() {
             this.questions = await (await fetch(QUESTIONS_URL)).json();

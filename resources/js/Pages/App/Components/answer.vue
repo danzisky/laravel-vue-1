@@ -1,5 +1,5 @@
 <template>
-    <div class="p-2 bg-slate-200">
+    <div class="p-4 border border-blue-300 rounded-lg">
         <div>
             <div>
                 {{ letter }}: {{ answer.answer }}
