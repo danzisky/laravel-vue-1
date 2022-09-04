@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->mediumText('question');
-            $table->integer('anchor_rank')->nullable()->default('2.01');
+            $table->float('anchor_rank')->nullable()->default('2.01');
             $table->mediumText('peak_personality')->default('extrovert');
             $table->timestamps();
         });
