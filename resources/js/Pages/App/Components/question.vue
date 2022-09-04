@@ -3,7 +3,6 @@
         <div class="">
             <div class="p-4 bg-blue-400 rounded-lg text-white text-lg">
                 Q: {{ question.question }}
-                {{ question.isCurrent ? 'yes' : 'no' }}
             </div>
             <div class="m-auto p-8 flex flex-col space-y-4">
                 <div class="space-y-4">

@@ -1,8 +1,13 @@
 <template>
     <div class="p-4 border-2_ border-blue-300_ rounded-lg bg-gray-100">
         <div>
-            <div>
-                <span class="py-2_ px-3 font-bold border-2_ border-blue-400_ text-white_ rounded-lg_ mr-2">{{ letter }}</span> {{ answer.answer }}
+            <div class="flex">
+                <div class="py-2_ px-3 w-max font-bold border-2_ border-blue-400_ text-white_ rounded-lg_ mr-2">
+                    {{ letter }}
+                </div>
+                <div>
+                    {{ answer.answer }}
+                </div>
             </div>
         </div>
     </div>
