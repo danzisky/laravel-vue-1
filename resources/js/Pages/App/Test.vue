@@ -110,7 +110,7 @@ export default {
                 // alert("submitting")
                 console.log("submitting")
                 const RESULT = this.questions.map((question) => {
-                    console.log(question)
+                    console.log(question.selectedOption)
                     return {
                         question_id: question.id,
                         anchor_rank: question.anchor_rank,
@@ -118,7 +118,10 @@ export default {
                         answer_rank: question.answers[question.selectedOption].rank,
                     }
                 })
-                console.log(RESULT)
+                const RESULT_URL = "http://127.0.0.1:8000/api/result"
+                var resultRequest = JSON.stringify(RESULT)
+                console.log()
+                var Response = await (await fetch(RESULT_URL)).json();
             }
 
 
