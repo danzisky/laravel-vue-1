@@ -68,13 +68,13 @@ export default {
             this.questions = questions
             this.showCurrentQuestion()
             this.nullSelectedOption()
-            console.log(this.questions)
+            // console.log(this.questions)
         },
         selectOption(questionIndex, answerIndex) {
             return this.questions[questionIndex].selectedOption =answerIndex
         },
         showCurrentQuestion() {
-            console.log(this.currentQuestion)
+            // console.log(this.currentQuestion)
             this.questions.forEach((question, index) => {
                 return question.isCurrent = index == this.currentQuestion ? true : false
             })
@@ -99,6 +99,7 @@ export default {
         }
     },
     components: {
+    Head,
     Base,
     Question,
     QuestionCount

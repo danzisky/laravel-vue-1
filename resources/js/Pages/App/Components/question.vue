@@ -33,7 +33,7 @@ export default {
     },
     created() {
         this.answers = this.question.answers ?? []
-        console.log(this.question.selectedOption)
+        // console.log(this.question.selectedOption)
         // console.log(this.answers)
     },
     updated() {
