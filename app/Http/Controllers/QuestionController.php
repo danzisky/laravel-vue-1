@@ -34,6 +34,7 @@ class QuestionController extends Controller
 
             } */
             $answerScore = ceil($response["answer_rank"] - $response["anchor_rank"]);
+            // dump($answerScore);
             
             if($response["peak_personality"] == "extrovert") {
                 if($answerScore <= 0) {
@@ -55,8 +56,8 @@ class QuestionController extends Controller
             ];
             $personalityResponse = collect($personalityResponse);
 
-            return $personalityResponse->toJson();
         }
+        return $personalityResponse->toJson();
     }
     /**
      * Show the form for creating a new resource.
