@@ -18,19 +18,25 @@ export default {
     props: {
         answer: Object,
         index: Number,
+        selectedOption: Number,
     },
     data() {
         return {
             letter: null,
+            selected: false,
         }
     },
     mounted() {
         this.letter = this.option(this.index);
+        this.isSelected()
     },
     methods: {
         option(increment) {
             const BASE_LETTER = 'A';
             return String.fromCharCode(BASE_LETTER.charCodeAt(0) + increment);
+        },
+        isSelected() {
+            this.selected = this.selectedOption === this.index ? true : false
         }
     }
 }
