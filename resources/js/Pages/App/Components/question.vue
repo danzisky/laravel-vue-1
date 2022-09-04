@@ -11,7 +11,7 @@
             </div>
             <div class="m-auto p-8 flex flex-col space-y-4">
                 <div class="space-y-4">
-                    <Answer v-for="(answer, index) in answers" :key="answer.id" :answer="answer" :index="index"
+                    <Answer v-for="(answer, index) in answers" :key="answer.id" :answer="answer" :selectedOption="question.selectedOption" :index="index"
                         @click="$emit('selectOption', questionIndex, index)" />
                 </div>
             </div>
@@ -34,7 +34,13 @@ export default {
     },
     created() {
         this.answers = this.question.answers ?? []
+        console.log(this.question.selectedOption)
         // console.log(this.answers)
+    },
+    updated() {
+        console.log('updated question')
+        console.log(this.question.selectedOption)
+        this.answers = this.question.answers ?? []
     },
     components: {
         Answer

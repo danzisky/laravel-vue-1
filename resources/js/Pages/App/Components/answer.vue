@@ -1,7 +1,9 @@
 <template>
     <div class="p-4 border-2_ border-blue-300_ rounded-lg bg-gray-100">
         <div>
-            <div class="flex">
+            <div class="flex" :class="{ 'text-pink-400': selected }">
+                {{ index }}
+                {{ selected ? 'selected' : ' disabled' }}
                 <div class="py-2_ px-3 w-max font-bold border-2_ border-blue-400_ text-white_ rounded-lg_ mr-2">
                     {{ letter }}
                 </div>
@@ -28,6 +30,13 @@ export default {
     },
     mounted() {
         this.letter = this.option(this.index);
+        this.isSelected()
+    },
+    beforeUpdate() {
+        this.isSelected()
+    },
+    updated() {
+        console.log('updayed answer')
         this.isSelected()
     },
     methods: {

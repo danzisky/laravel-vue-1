@@ -46,6 +46,10 @@ export default {
         this.currentQuestion = 0
         this.fetchData()
     },
+
+    updated() {
+        console.log("updated base")
+    },
     
     methods: {
         async fetchData() {
@@ -55,17 +59,35 @@ export default {
             
             this.questions = questions
             this.showCurrentQuestion()
+            this.nullSelectedOption()
             console.log(this.questions)
         },
         selectOption(questionIndex, answerIndex) {
-            this.questions[questionIndex].selectedOption = answerIndex
-            // console.log(this.questions[questionIndex])
+            var questions = this.setSelectedOption(questionIndex, answerIndex)
+            console.log(this.questions[questionIndex].selectedOption)
+            // this.questions = questions
         },
         showCurrentQuestion() {
             console.log(this.currentQuestion)
             this.questions.forEach((question, index) => {
                 return question.isCurrent = index == this.currentQuestion ? true : false
             })
+        },
+        nullSelectedOption() {
+            console.log('nulling selected')
+            this.questions.forEach((question, index) => {
+                return question.selectedOption =  null
+            })
+            console.log(this.questions.length)
+            console.log('nulled selected')
+        },
+        setSelectedOption(questionIndex, answerIndex) {
+            console.log('setting selected')
+            this.questions.forEach((question, index) => {
+                return question.selectedOption = questionIndex === index ? answerIndex : question.selectedOption
+            })
+            console.log(this.questions)
+            console.log('set selected')
         },
         nextQuestion(event) {
             this.currentQuestion++
