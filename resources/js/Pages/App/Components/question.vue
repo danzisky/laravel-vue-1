@@ -39,8 +39,8 @@ export default {
     },
     updated() {
         console.log('updated question')
-        console.log(this.question.selectedOption)
-        this.answers = this.question.answers ?? []
+        // console.log(this.question.selectedOption)
+        // this.answers = this.question.answers ?? []
     },
     components: {
         Answer

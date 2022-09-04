@@ -63,9 +63,7 @@ export default {
             console.log(this.questions)
         },
         selectOption(questionIndex, answerIndex) {
-            var questions = this.setSelectedOption(questionIndex, answerIndex)
-            console.log(this.questions[questionIndex].selectedOption)
-            // this.questions = questions
+            return this.questions[questionIndex].selectedOption =answerIndex
         },
         showCurrentQuestion() {
             console.log(this.currentQuestion)
@@ -74,20 +72,12 @@ export default {
             })
         },
         nullSelectedOption() {
-            console.log('nulling selected')
+            // console.log('nulling selected')
             this.questions.forEach((question, index) => {
                 return question.selectedOption =  null
             })
-            console.log(this.questions.length)
-            console.log('nulled selected')
-        },
-        setSelectedOption(questionIndex, answerIndex) {
-            console.log('setting selected')
-            this.questions.forEach((question, index) => {
-                return question.selectedOption = questionIndex === index ? answerIndex : question.selectedOption
-            })
-            console.log(this.questions)
-            console.log('set selected')
+            // console.log(this.questions.length)
+            // console.log('nulled selected')
         },
         nextQuestion(event) {
             this.currentQuestion++
