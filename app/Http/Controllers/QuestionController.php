@@ -6,7 +6,7 @@ use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -21,7 +21,8 @@ class QuestionController extends Controller
     }
 
     public function deductPersonality(Request $request) {
-        $testResponse = $request->testResponse;
+        // dd($request->testResponse);
+        $testResponse = collect($request->testResponse) ?? [];
 
         $extrovertScore = 0;
         $introvertScore = 0;
@@ -32,9 +33,9 @@ class QuestionController extends Controller
             /* if($response->anchor_rank !== $max_rank/2) {
 
             } */
-            $answerScore = $response->answer_rank - $response->anchor_rank;
+            $answerScore = $response["answer_rank"] - $response["anchor_rank"];
             
-            if($response->peak_personality == "extrovert") {
+            if($response["peak_personality"] == "extrovert") {
                 if($answerScore <= 0) {
                     $introvertScore += abs($answerScore);
                 } elseif ($answerScore > 0) {
@@ -48,13 +49,13 @@ class QuestionController extends Controller
                 }
             }
 
-            $result = [
+            $personalityResponse = [
                 'introvertScore' => $introvertScore,
                 'extrovertScore' => $extrovertScore,
             ];
-            $result = collect($result);
+            $personalityResponse = collect($personalityResponse);
 
-            return $result->toJson();
+            return $personalityResponse->toJson();
         }
     }
     /**

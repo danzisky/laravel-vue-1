@@ -114,6 +114,7 @@ export default {
                     return {
                         question_id: question.id,
                         anchor_rank: question.anchor_rank,
+                        peak_personality: question.peak_personality,
                         answer_id: question.answers[question.selectedOption].id,
                         answer_rank: question.answers[question.selectedOption].rank,
                     }
@@ -125,9 +126,11 @@ export default {
         },
         async getPersonalityScores(RESULT) {
             const RESULT_URL = "http://127.0.0.1:8000/api/result"
-                var resultRequest = JSON.stringify(RESULT)
-                console.log()
-                const res = await axios.post(RESULT_URL, RESULT);
+                var resultRequest = {
+                    testResponse: RESULT
+                }
+                console.log(resultRequest)
+                const res = await axios.post(RESULT_URL, resultRequest)
                 console.log(res)
         },
     },
