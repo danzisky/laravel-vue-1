@@ -23,7 +23,7 @@
                 <div v-if="nextQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
                     Next
                 </div>
-                <div v-else class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
+                <div v-else class="px-4 py-2 bg-blue-100 rounded-lg" @click="submit">
                     Submit
                 </div>
             </div>
@@ -96,6 +96,9 @@ export default {
         previousQuestion(event) {
             this.currentQuestion--
             this.showCurrentQuestion()
+        },
+        submit() {
+
         }
     },
     components: {
@@ -107,6 +110,3 @@ export default {
 }
 
 </script>
-
-<style>
-</style>

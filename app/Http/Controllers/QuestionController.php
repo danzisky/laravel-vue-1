@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
+use Illuminate\Http\Client\Request;
 
 class QuestionController extends Controller
 {
@@ -19,6 +20,43 @@ class QuestionController extends Controller
         return QuestionResource::collection(Question::all());
     }
 
+    public function deductPersonality(Request $request) {
+        $testResponse = $request->testResponse;
+
+        $extrovertScore = 0;
+        $introvertScore = 0;
+
+        // simplest way, find aveeragee of the ranks. But can be inaccurate, depending on anchor rank
+        $responseRanks = array_column($testResponse, 'rank');
+        foreach ($testResponse as $response) {
+            /* if($response->anchor_rank !== $max_rank/2) {
+
+            } */
+
+            $answerScore = $response->answer_rank - $response->anchor_rank;
+            
+            if($response->peak_personality == "extrovert") {
+                if($answerScore <= 0) {
+                    $introvertScore += abs($answerScore);
+                } elseif ($answerScore > 0) {
+                    $extrovertScore += abs($answerScore);
+                }
+            } else {
+                if($answerScore <= 0) {
+                    $extrovertScore += abs($answerScore);
+                } elseif ($answerScore > 0) {
+                    $introvertScore += abs($answerScore);
+                }
+            }
+            
+            $result = [
+                'introvertScore' => $introvertScore,
+                'extrovertScore' => $extrovertScore,
+            ];
+
+            return $result;
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
