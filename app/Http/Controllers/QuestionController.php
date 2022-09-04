@@ -27,12 +27,11 @@ class QuestionController extends Controller
         $introvertScore = 0;
 
         // simplest way, find aveeragee of the ranks. But can be inaccurate, depending on anchor rank
-        $responseRanks = array_column($testResponse, 'rank');
+        // $responseRanks = array_column($testResponse, 'rank');
         foreach ($testResponse as $response) {
             /* if($response->anchor_rank !== $max_rank/2) {
 
             } */
-
             $answerScore = $response->answer_rank - $response->anchor_rank;
             
             if($response->peak_personality == "extrovert") {
@@ -48,13 +47,14 @@ class QuestionController extends Controller
                     $introvertScore += abs($answerScore);
                 }
             }
-            
+
             $result = [
                 'introvertScore' => $introvertScore,
                 'extrovertScore' => $extrovertScore,
             ];
+            $result = collect($result);
 
-            return $result;
+            return $result->toJson();
         }
     }
     /**
