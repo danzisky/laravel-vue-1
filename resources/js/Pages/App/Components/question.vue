@@ -1,8 +1,9 @@
 <template>
-    <div class="p-4 bg-slate-200">
+    <div v-if="question.isCurrent" class="p-4 bg-slate-200">
         <div>
             <div class="p-4 bg-blue-300 rounded-lg">
                 Q: {{ question.question }}
+                {{ question.isCurrent ? 'yes' : 'no' }}
             </div>
             <div class="m-auto p-8 flex flex-col space-y-4">
                 <div class="space-y-4">
@@ -22,12 +23,12 @@ export default {
     data() {
         return {
             answers: this.question.answers ?? [],
-            question: this.question,
+            // question: this.question,
         };
     },
     created() {
         this.answers = this.question.answers ?? []
-        console.log(this.answers)
+        // console.log(this.answers)
     },
     components: {
         Answer

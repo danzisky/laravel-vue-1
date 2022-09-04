@@ -8,6 +8,16 @@
                 <Question v-for="question in questions" :key="question.id" :question="question" />
             </div>
         </div>
+        <div class="m-auto_ p-8 ">
+            <div class="flex justify-center space-x-4">
+                <div class="px-4 py-2 bg-blue-300 rounded-lg">
+                    Previous
+                </div>
+                <div class="px-4 py-2 bg-blue-300 rounded-lg">
+                    Next
+                </div>
+            </div>
+    </div>
     </div>
     </Base>
 </template>
@@ -23,20 +33,35 @@ export default {
     data() {
         return {
             questions: [],
+            currentQuestion: null,
         };
     },
 
     created() {
         this.fetchData()
+        this.currentQuestion = 0
     },
     
     methods: {
         async fetchData() {
-            this.questions = await (await fetch(QUESTIONS_URL)).json();
-            this.questions = this.questions.data ? this.questions.data : []
+            var questions = await (await fetch(QUESTIONS_URL)).json();
+
+            questions = questions.data ? questions.data : []
+
+            questions.forEach((question, index) => {
+                question.isCurrent = index == 0 ? true : false
+            });
+
+            this.questions = questions
             console.log(this.questions)
             // this.questions = json_decode(this.questions)
         },
+        nestQuestion() {
+            this.currentQuestion++
+        },
+        previousQuestion() {
+
+        }
     },
     components: {
         Base,
