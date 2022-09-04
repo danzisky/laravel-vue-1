@@ -71,7 +71,7 @@ export default {
             // console.log(this.questions)
         },
         selectOption(questionIndex, answerIndex) {
-            return this.questions[questionIndex].selectedOption =answerIndex
+            return this.questions[questionIndex].selectedOption = this.questions[questionIndex].selectedOption === answerIndex ? null : answerIndex;
         },
         showCurrentQuestion() {
             // console.log(this.currentQuestion)
@@ -98,7 +98,21 @@ export default {
             this.showCurrentQuestion()
         },
         submit() {
+            var allFilled = this.questions.every(checkOptionsSelected)
 
+            function checkOptionsSelected(question) {
+                return (question.selectedOption !== null && !isNaN(question.selectedOption));
+            }
+
+            if(!allFilled) {
+                alert("Please fill all options")
+            } else {
+                alert("submitting")
+            }
+
+            /* this.questions.forEach((question) => {
+
+            }) */
         }
     },
     components: {
