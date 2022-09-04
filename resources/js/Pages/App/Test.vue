@@ -1,27 +1,28 @@
 <template>
     <Base>
 
-        <Head title="Home" />
-        <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
-            <div class="m-auto_ p-8 flex flex-col items-center">
-                <div class="p-4 w-full flex justify-end">
-                    <QuestionCount :questionsLength="questions.length" :currentQuestion="currentQuestion"/>
-                </div>
-                <div class="p-4">
-                    <Question v-for="question in questions" :key="question.id" :question="question" />
-                </div>
+    <Head title="Home" />
+    <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
+        <div class="m-auto_ p-8 flex flex-col items-center">
+            <div class="p-4 w-full flex justify-end">
+                <QuestionCount :questionsLength="questions.length" :currentQuestion="currentQuestion" />
             </div>
-            <div class="m-auto_ p-8 ">
-                <div class="flex justify-center space-x-4">
-                    <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="previousQuestion">
-                        Previous
-                    </div>
-                    <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
-                        Next
-                    </div>
+            <div class="p-4">
+                <Question v-for="(question, index) in questions" :key="question.id" :question="question" :questionIndex="index"
+                    @select-option="selectOption" />
+            </div>
+        </div>
+        <div class="m-auto_ p-8 ">
+            <div class="flex justify-center space-x-4">
+                <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="previousQuestion">
+                    Previous
+                </div>
+                <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
+                    Next
                 </div>
             </div>
         </div>
+    </div>
     </Base>
 </template>
 
@@ -55,6 +56,10 @@ export default {
             this.questions = questions
             this.showCurrentQuestion()
             console.log(this.questions)
+        },
+        selectOption(questionIndex, answerIndex) {
+            this.questions[questionIndex].selectedOption = answerIndex
+            // console.log(this.questions[questionIndex])
         },
         showCurrentQuestion() {
             console.log(this.currentQuestion)

@@ -11,7 +11,8 @@
             </div>
             <div class="m-auto p-8 flex flex-col space-y-4">
                 <div class="space-y-4">
-                    <Answer v-for="(answer, index) in answers" :key="answer.id" :answer="answer" :index="index" />
+                    <Answer v-for="(answer, index) in answers" :key="answer.id" :answer="answer" :index="index"
+                        @click="$emit('selectOption', questionIndex, index)" />
                 </div>
             </div>
         </div>
@@ -23,6 +24,7 @@ import Answer from "./answer.vue"
 export default {
     props: {
         question: Object,
+        questionIndex: Number,
     },
     data() {
         return {
