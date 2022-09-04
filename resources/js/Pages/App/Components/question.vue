@@ -1,8 +1,13 @@
 <template>
     <div v-if="question.isCurrent" class="p-4 bg-gray-200 rounded-lg">
         <div class="">
-            <div class="p-4 bg-blue-400 rounded-lg text-white text-lg">
-                Q: {{ question.question }}
+            <div class="flex p-4 bg-blue-400 rounded-lg text-white text-lg">
+                <div class="px-3 w-max font-bold mr-2">
+                    Q
+                </div>
+                <div>
+                    {{ question.question }}
+                </div>
             </div>
             <div class="m-auto p-8 flex flex-col space-y-4">
                 <div class="space-y-4">
