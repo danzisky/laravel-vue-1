@@ -107,12 +107,21 @@ export default {
             if(!allFilled) {
                 alert("Please fill all options")
             } else {
-                alert("submitting")
+                // alert("submitting")
+                console.log("submitting")
+                const RESULT = this.questions.map((question) => {
+                    console.log(question)
+                    return {
+                        question_id: question.id,
+                        anchor_rank: question.anchor_rank,
+                        answer_id: question.answers[question.selectedOption].id,
+                        answer_rank: question.answers[question.selectedOption].rank,
+                    }
+                })
+                console.log(RESULT)
             }
 
-            /* this.questions.forEach((question) => {
 
-            }) */
         }
     },
     components: {
