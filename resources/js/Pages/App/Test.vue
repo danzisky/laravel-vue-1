@@ -14,11 +14,17 @@
         </div>
         <div class="m-auto_ p-8 ">
             <div class="flex justify-center space-x-4">
-                <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="previousQuestion">
+                <div v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="previousQuestion">
                     Previous
                 </div>
-                <div class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
+                <div v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
+                    Previous
+                </div>
+                <div v-if="nextQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
                     Next
+                </div>
+                <div v-else class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
+                    Submit
                 </div>
             </div>
         </div>
@@ -39,6 +45,8 @@ export default {
         return {
             questions: [],
             currentQuestion: null,
+            nextQuestionAvailable: false,
+            previousQuestionAvailable: false,
         };
     },
 
@@ -70,6 +78,8 @@ export default {
             this.questions.forEach((question, index) => {
                 return question.isCurrent = index == this.currentQuestion ? true : false
             })
+            this.nextQuestionAvailable = this.questions.length <= this.currentQuestion + 1 ? false : true
+            this.previousQuestionAvailable = (this.questions.length >= this.currentQuestion && this.currentQuestion >= 1) ? true : false
         },
         nullSelectedOption() {
             // console.log('nulling selected')
