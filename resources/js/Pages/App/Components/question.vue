@@ -1,7 +1,7 @@
 <template>
-    <div v-if="question.isCurrent" class="p-4 bg-slate-200">
+    <div v-if="question.isCurrent" class="p-4 bg-gray-200 rounded-lg">
         <div class="">
-            <div class="p-4 bg-blue-300 rounded-lg">
+            <div class="p-4 bg-blue-400 rounded-lg text-white text-lg">
                 Q: {{ question.question }}
                 {{ question.isCurrent ? 'yes' : 'no' }}
             </div>
