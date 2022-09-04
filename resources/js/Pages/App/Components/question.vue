@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             answers: this.question.answers ?? [],
-            // question: this.question,
         };
     },
     created() {
@@ -39,8 +38,6 @@ export default {
     },
     updated() {
         console.log('updated question')
-        // console.log(this.question.selectedOption)
-        // this.answers = this.question.answers ?? []
     },
     components: {
         Answer
