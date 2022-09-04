@@ -1,6 +1,6 @@
 <template>
     <div v-if="question.isCurrent" class="p-4 bg-slate-200">
-        <div>
+        <div class="">
             <div class="p-4 bg-blue-300 rounded-lg">
                 Q: {{ question.question }}
                 {{ question.isCurrent ? 'yes' : 'no' }}
