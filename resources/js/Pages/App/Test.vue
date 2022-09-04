@@ -31,7 +31,7 @@
     </div>
     </Base>
 </template>
-
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script>
 import Base from "./Base.vue";
 import { Head } from "@inertiajs/inertia-vue3";
@@ -118,14 +118,18 @@ export default {
                         answer_rank: question.answers[question.selectedOption].rank,
                     }
                 })
-                const RESULT_URL = "http://127.0.0.1:8000/api/result"
-                var resultRequest = JSON.stringify(RESULT)
-                console.log()
-                var Response = await (await fetch(RESULT_URL)).json();
+                this.getPersonalityScores(RESULT)
             }
 
 
-        }
+        },
+        async getPersonalityScores(RESULT) {
+            const RESULT_URL = "http://127.0.0.1:8000/api/result"
+                var resultRequest = JSON.stringify(RESULT)
+                console.log()
+                const res = await axios.post(RESULT_URL, RESULT);
+                console.log(res)
+        },
     },
     components: {
     Head,
