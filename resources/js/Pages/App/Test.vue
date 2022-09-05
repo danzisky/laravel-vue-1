@@ -6,10 +6,11 @@
         <div>
             <Result :showing="showResults" @close="showResults = false">
                 <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                    <p class="mb-6">Your answers are {{ personalityPercentages.introvertScore }}%
+                    <p class="mb-1">Your answers are {{ personalityPercentages.introvertScore }}%
                     introverted and {{
                     personalityPercentages.extrovertScore }}% extroverted
-
+                </p>
+                <p class="mb-6 text-lg font-bold animate-pulse">
                     You are an {{ personalityType }}!
                 </p>
                 <button class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
