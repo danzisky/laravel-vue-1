@@ -6,7 +6,7 @@
         <div>
             <Result :showing="showResults" @close="showResults = false">
                 <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                    <p class="mb-6">You are {{ personalityPercentages.introvertScore }}%
+                    <p class="mb-6">Your answers are {{ personalityPercentages.introvertScore }}%
                     introverted and {{
                     personalityPercentages.extrovertScore }}% extroverted
 
