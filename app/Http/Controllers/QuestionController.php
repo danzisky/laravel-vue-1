@@ -34,7 +34,7 @@ class QuestionController extends Controller
 
             } */
             $answerScore = $response["answer_rank"] - $response["anchor_rank"];
-            dump($answerScore);
+            // dump($answerScore);
             
             if($response["peak_personality"] == "extrovert") {
                 if($answerScore <= 0) {

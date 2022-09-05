@@ -3,18 +3,30 @@
 
     <Head title="Home" />
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
+        <div>
+            <Result :showing="showResults" @close="showResults = false">
+                <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
+                <p class="mb-6">You are {{ result.introvertScore/(result.introvertScore+result.extrovertScore)*100 }}%
+                    introverted and {{ result.extrovertScore/(result.introvertScore+result.extrovertScore)*100 }}% extroverted</p>
+                <button class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
+                    @click="exampleModalShowing = false">
+                    Close
+                </button>
+            </Result>
+        </div>
         <div class="m-auto_ p-8 flex flex-col items-center">
             <div class="p-4 w-full flex justify-end">
                 <QuestionCount :questionsLength="questions.length" :currentQuestion="currentQuestion" />
             </div>
             <div class="p-4">
-                <Question v-for="(question, index) in questions" :key="question.id" :question="question" :questionIndex="index"
-                    @select-option="selectOption" />
+                <Question v-for="(question, index) in questions" :key="question.id" :question="question"
+                    :questionIndex="index" @select-option="selectOption" />
             </div>
         </div>
         <div class="m-auto_ p-8 ">
             <div class="flex justify-center space-x-4">
-                <div v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="previousQuestion">
+                <div v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg"
+                    @click="previousQuestion">
                     Previous
                 </div>
                 <div v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
@@ -37,6 +49,7 @@ import Base from "./Base.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import Question from "./Components/question.vue";
 import QuestionCount from "./Components/questionCount.vue";
+import Result from "./Components/result.vue";
 
 const QUESTIONS_URL = "http://127.0.0.1:8000/api/questions"
 
@@ -47,6 +60,8 @@ export default {
             currentQuestion: null,
             nextQuestionAvailable: false,
             previousQuestionAvailable: false,
+            showResults: false,
+            result: [],
         };
     },
 
@@ -119,26 +134,37 @@ export default {
                         answer_rank: question.answers[question.selectedOption].rank,
                     }
                 })
-                this.getPersonalityScores(RESULT)
+                var scores = this.getPersonalityScores(RESULT)
+                console.log(scores)
+                /* if(scores.includes('data')) {
+                    this.showResults = true
+                } */
             }
 
 
         },
         async getPersonalityScores(RESULT) {
             const RESULT_URL = "http://127.0.0.1:8000/api/result"
-                var resultRequest = {
-                    testResponse: RESULT
-                }
-                console.log(resultRequest)
-                const res = await axios.post(RESULT_URL, resultRequest)
-                console.log(res)
+            var resultRequest = {
+                testResponse: RESULT
+            }
+            console.log(resultRequest)
+            var res = await axios.post(RESULT_URL, resultRequest)
+            console.log(res.data)
+
+            if(res.data) {
+                this.showResults = true
+                this.result = res.data
+            }
+            return res
         },
     },
     components: {
     Head,
     Base,
     Question,
-    QuestionCount
+    QuestionCount,
+    Result
 }
 }
 
