@@ -4,20 +4,7 @@
     <Head title="Home" />
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
         <div>
-            <Result :showing="showResults" @close="showResults = false">
-                <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                <p class="mb-1">Your answers are {{ personalityPercentages.introvertScore }}%
-                    introverted and {{
-                    personalityPercentages.extrovertScore }}% extroverted
-                </p>
-                <p class="mb-6 text-lg font-bold animate-pulse">
-                    You are an {{ personalityType }}!
-                </p>
-                <button class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
-                    @click="showResults = false">
-                    Close
-                </button>
-            </Result>
+            <Result :showing="showResults" :personalityPercentages="personalityPercentages" :personalityType="personalityType" @close="showResults = false"/>
         </div>
         <div class="m-auto_ p-8 flex flex-col items-center">
             <div class="p-4 w-full flex justify-end">
