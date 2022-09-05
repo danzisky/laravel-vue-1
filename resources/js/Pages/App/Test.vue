@@ -81,9 +81,9 @@ export default {
         personalityPercentages() {
             var result = this.result
             return {
-                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(1)*100,
+                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(2)*100,
 
-                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(1)*100,
+                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(2)*100,
             }
         }
     },
