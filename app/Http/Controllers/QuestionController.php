@@ -39,14 +39,18 @@ class QuestionController extends Controller
             if($response["peak_personality"] == "extrovert") {
                 if($answerScore <= 0) {
                     $introvertScore += ceil(abs($answerScore));
+                    $extrovertScore += floor($response["anchor_rank"]-ceil(abs($answerScore)));
                 } elseif ($answerScore > 0) {
                     $extrovertScore += ceil(abs($answerScore));
+                    $introvertScore += floor($response["anchor_rank"]-ceil(abs($answerScore)));
                 }
             } else {
                 if($answerScore <= 0) {
                     $extrovertScore += ceil(abs($answerScore));
+                    $introvertScore += floor($response["anchor_rank"]-ceil(abs($answerScore)));
                 } elseif ($answerScore > 0) {
                     $introvertScore += ceil(abs($answerScore));
+                    $extrovertScore += floor($response["anchor_rank"]-ceil(abs($answerScore)));
                 }
             }
 
