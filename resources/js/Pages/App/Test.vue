@@ -6,10 +6,11 @@
         <div>
             <Result :showing="showResults" @close="showResults = false">
                 <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                <p class="mb-6">You are {{
-                    result.introvertScore/(result.introvertScore+result.extrovertScore).toFixed(2)*100 }}%
+                    <p class="mb-6">You are {{ personalityPercentages.introvertScore }}%
                     introverted and {{
-                    result.extrovertScore/(result.introvertScore+result.extrovertScore).toFixed(2)*100 }}% extroverted
+                    personalityPercentages.extrovertScore }}% extroverted
+
+                    You are an {{ personalityType }}!
                 </p>
                 <button class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
                     @click="exampleModalShowing = false">
@@ -66,6 +67,25 @@ export default {
             showResults: false,
             result: [],
         };
+    },
+    computed: {
+        personalityType() {
+            if(this.result.extrovertScore > this.result.introvertScore) {
+                return "Extrovert"
+            } else if(this.result.introvertScore > this.result.extrovertScore) {
+                return "Introvert"
+            } else {
+                return "Ambivert"
+            }
+        },
+        personalityPercentages() {
+            var result = this.result
+            return {
+                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(1)*100,
+
+                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(1)*100,
+            }
+        }
     },
 
     created() {
