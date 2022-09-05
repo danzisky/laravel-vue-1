@@ -6,8 +6,11 @@
         <div>
             <Result :showing="showResults" @close="showResults = false">
                 <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                <p class="mb-6">You are {{ result.introvertScore/(result.introvertScore+result.extrovertScore)*100 }}%
-                    introverted and {{ result.extrovertScore/(result.introvertScore+result.extrovertScore)*100 }}% extroverted</p>
+                <p class="mb-6">You are {{
+                    result.introvertScore/(result.introvertScore+result.extrovertScore).toFixed(2)*100 }}%
+                    introverted and {{
+                    result.extrovertScore/(result.introvertScore+result.extrovertScore).toFixed(2)*100 }}% extroverted
+                </p>
                 <button class="bg-blue-600 text-white px-4 py-2 text-sm uppercase tracking-wide font-bold rounded-lg"
                     @click="exampleModalShowing = false">
                     Close
