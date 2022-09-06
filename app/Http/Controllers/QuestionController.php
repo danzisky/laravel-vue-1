@@ -50,6 +50,7 @@ class QuestionController extends Controller
             'introvertScore' => $introvertScore,
             'extrovertScore' => $extrovertScore,
         ];
+        $personalityResponse = collect($personalityResponse);
         return $personalityResponse->toJson();
     }
     /* public function deductPersonality(Request $request) {
