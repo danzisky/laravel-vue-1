@@ -1,10 +1,9 @@
 <template>
     <Transition name="bounce">
-        <div v-if="canSubmit" @click="$emit('submit')"
-            class="px-4 py-2 bg-blue-100 rounded-lg border-2 border-blue-400 animate-bounce hover:animate-none
-            transition-all ease-in-out delay-75 duration-75">
+        <button v-if="canSubmit" @click="$emit('submit')"
+            class="px-4 py-2 bg-blue-100_ rounded-lg border-2 border-blue-100 hover:animate-none text-white transition ease-in-out delay-150 bg-blue-400 hover:-translate-y-1 focus:-translate-y-1 hover:scale-110 focus:scale-110 hover:bg-indigo-500 duration-3005">
             Submit
-        </div>
+        </button>
     </Transition>
 </template>
 
