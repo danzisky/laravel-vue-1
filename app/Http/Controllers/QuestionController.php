@@ -43,26 +43,17 @@ class QuestionController extends Controller
             $totalScore += ($response['peak_personality'] == "extrovert" ? $responseRank : 3 - $responseRank)/3 *4;
             $totalScoreInt += ($response['peak_personality'] == "extrovert" ? 3 - $responseRank : $responseRank)/3 * 4;
 
-            /* $totalScore = $response['peak_personality'] == "extrovert" ? $response['answer_rank'] : (maxAnswerRank + minAnswerRank) - $response['answer_rank']; */
-            /* $totalScoreInt = 
-            (maxAnswerRank + minAnswerRank) - $response['peak_personality'] == "extrovert" ? $response['answer_rank'] : 4 - $response['answer_rank']; */
-
             $totalQuestions++;
         }
 
         $extrovertedness = $totalScore/($totalQuestions * 4);
         $introvertedness = $totalScoreInt/($totalQuestions * 4);
-        // $introvertedness = (1 - $extrovertedness);
-        // pure extrovert has an 'extrvertedness' score of 1
-
+        
         $netScore = $extrovertedness - $introvertedness;
-
-        // $extrovertScore = $netScore > 0 ? $netScore : 1 - abs($netScore); //since extrovertedness is reference point
-        // $introvertScore = $netScore < 0 ? abs($netScore) : 1 - abs($netScore);
-
-        // $introvertScore = (1 - $extrovertedness) * 4;
+        
         $introvertScore = $introvertedness;
         $extrovertScore = $extrovertedness;
+
         $personalityResponse = [
             'netScore' => $netScore,
             'totalQuestions' => $totalQuestions,
@@ -76,65 +67,6 @@ class QuestionController extends Controller
         $personalityResponse = collect($personalityResponse);
         return $personalityResponse->toJson();
     }
-    /* public function deductPersonality(Request $request) {
-        // dd($request->testResponse);
-        $testResponse = collect($request->testResponse) ?? [];
-
-        $totalExtrovertScore = 0;
-        $totalIntrovertScore = 0;
-
-        // simplest way, find aveeragee of the ranks. But can be inaccurate, depending on anchor rank
-        // $responseRanks = array_column($testResponse, 'rank');
-        foreach ($testResponse as $response) {
-            // if($response->anchor_rank !== $max_rank/2) {
-
-            // }
-            $answerScore = $response["answer_rank"] - $response["anchor_rank"];
-            // dump($answerScore);
-            
-            if($response["peak_personality"] == "extrovert") {
-                $maxIntrovertScore = floor($response["anchor_rank"]);
-                $maxExtrovertScore = ceil(4 - $response["anchor_rank"]);
-                if($answerScore <= 0) {
-                    $introvertScore = ceil(abs($answerScore));
-                    $extrovertScore = $maxIntrovertScore - $introvertScore;
-                } elseif ($answerScore > 0) {
-                    $extrovertScore = ceil(abs($answerScore));
-                    $introvertScore = $maxExtrovertScore - $extrovertScore;
-                }
-                
-            } else {
-                $maxIntrovertScore = ceil(4 - $response["anchor_rank"]);
-                $maxExtrovertScore = floor($response["anchor_rank"]);
-                if($answerScore <= 0) {
-                    $extrovertScore = ceil(abs($answerScore));
-                    $introvertScore = $maxExtrovertScore - $extrovertScore;
-                } elseif ($answerScore > 0) {
-                    $introvertScore = ceil(abs($answerScore));
-                    $extrovertScore = $maxIntrovertScore - $introvertScore;
-                }
-            }
-            
-            $totalExtrovertScore += $extrovertScore;
-            $totalIntrovertScore += $introvertScore;
-                
-            $data[] = [
-                'answerScore' => ceil(abs($answerScore)),
-                'extrovertScore' => $extrovertScore,
-                'introvertScore' => $introvertScore,
-                'maxIntrovertScore' => $maxIntrovertScore,
-                'maxExtrovertScore' => $maxExtrovertScore,
-            ];
-            
-        }
-        $personalityResponse = [
-            'introvertScore' => $totalIntrovertScore,
-            'extrovertScore' => $totalExtrovertScore,
-            'data' => $data,
-        ];
-        $personalityResponse = collect($personalityResponse);
-        return $personalityResponse->toJson();
-    } */
     /**
      * Show the form for creating a new resource.
      *
