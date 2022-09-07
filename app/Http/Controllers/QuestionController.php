@@ -30,15 +30,22 @@ class QuestionController extends Controller
         $introvertScore = 0;
 
         // simplest way, find aveeragee of the ranks. But can be inaccurate, depending on anchor rank
-        // $responseRanks = array_column($testResponse, 'rank');
+
+        // in the formula below
+        // '3' can be substituded for maxAnswerRank - minAnswerRank
+        // '1' can be substituded for minAnswerRank
+        // '4' can be substituded for maxAnswerRank
+        // for a more practical formmula
+
         $totalQuestions = 0;
         $totalScore = 0;
         $totalScoreInt = 0;
         foreach ($testResponse as $response) {
             // given the answers are for evenly increasing levels of personality difference from one extreme to the other
 
-            // using extrovertedness as reference
-            // $response['answer_rank']--;
+            // the deduction by 1 is to have the possibility of a zero value to indicate complete absence of the opposite personality
+            // the multiplicaion of the ration by 4 is to have it back on the scale
+
             $responseRank = $response['answer_rank'] - 1;
             $totalScore += ($response['peak_personality'] == "extrovert" ? $responseRank : 3 - $responseRank)/3 *4;
             $totalScoreInt += ($response['peak_personality'] == "extrovert" ? 3 - $responseRank : $responseRank)/3 * 4;
