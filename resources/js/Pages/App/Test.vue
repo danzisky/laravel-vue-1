@@ -32,6 +32,9 @@
                     Next
                 </div>
             </div>
+            <div class="flex justify-center space-x-4 m-2 p-4">
+                <SubmitButton v-if="canSubmit == true" @submit="submit" />
+            </div>
         </div>
     </div>
     </Base>
@@ -43,6 +46,7 @@ import { Head } from "@inertiajs/inertia-vue3";
 import Question from "./Components/question.vue";
 import QuestionCount from "./Components/questionCount.vue";
 import Result from "./Components/result.vue";
+import SubmitButton from "./Components/submitButton.vue";
 
 const QUESTIONS_URL = "http://127.0.0.1:8000/api/questions"
 
@@ -54,6 +58,7 @@ export default {
             nextQuestionAvailable: false,
             previousQuestionAvailable: false,
             showResults: false,
+            canSubmit: false,
             result: [],
         };
     },
@@ -85,6 +90,12 @@ export default {
     updated() {
         console.log("updated base")
     },
+    watch: {
+        questions() {
+            console.log("watch questions")
+            return this.optionsFilled() ? this.canSubmit = true : false
+        }
+    },
     
     methods: {
         async fetchData() {
@@ -97,16 +108,22 @@ export default {
             this.nullSelectedOption()
             // console.log(this.questions)
         },
-        canSubmit() {
+        optionsFilled() {
             return this.questions.every(checkOptionsSelected)
 
             function checkOptionsSelected(question) {
-                return (question.selectedOption !== null && !isNaN(question.selectedOption));
+                console.log(question.selectedOption)
+                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
             }
 
         },
         selectOption(questionIndex, answerIndex) {
-            return this.questions[questionIndex].selectedOption = this.questions[questionIndex].selectedOption === answerIndex ? null : answerIndex;
+            
+            this.questions[questionIndex].selectedOption = this.questions[questionIndex].selectedOption === answerIndex ? null : answerIndex;
+            
+            this.canSubmit = this.optionsFilled() ? true : false
+            
+            return
         },
         showCurrentQuestion() {
             // console.log(this.currentQuestion)
@@ -133,7 +150,7 @@ export default {
             this.showCurrentQuestion()
         },
         submit() {
-            var allFilled = this.canSubmit()
+            var allFilled = this.optionsFilled()
             
             if(!allFilled) {
                 alert("Please fill all options")
@@ -180,7 +197,8 @@ export default {
     Base,
     Question,
     QuestionCount,
-    Result
+    Result,
+    SubmitButton
 }
 }
 
