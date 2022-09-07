@@ -3,7 +3,8 @@
 
     <Head title="Home" />
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
-        <div>
+        <div class="z-10">
+            <div v-if="showResults" class="absolute w-full h-screen top-0 right-0 bg-gray-600 opacity-70 transition delay-75"></div>
             <Result :showing="showResults" :personalityPercentages="personalityPercentages"
                 :personalityType="personalityType" @close="showResults = false" />
         </div>
@@ -33,7 +34,7 @@
                 </div>
             </div>
             <div class="flex justify-center space-x-4 m-2 p-4">
-                <SubmitButton v-if="canSubmit == true" @submit="submit" />
+                <SubmitButton :canSubmit="canSubmit == true" @submit="submit" />
             </div>
         </div>
     </div>

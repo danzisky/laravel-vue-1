@@ -1,9 +1,8 @@
 <template>
-    <Transition name="fade">
+    <Transition name="bounce">
         <div v-if="showing"
             class="mx-2 sm:mx-auto fixed inset-0 w-full h-screen flex items-center justify-center bg-semi-75 z-10"
             @click.self="close" @click.away="close">
-            <div class="absolute w-full h-screen top-0 right-0 bg-gray-600 opacity-70"></div>
             <div class="relative w-full max-w-2xl bg-white shadow-lg rounded-lg p-8">
                 <button aria-label="close" class="absolute top-0 right-0 text-xl text-gray-500 my-2 mx-4"
                     @click.prevent="close">
@@ -57,13 +56,26 @@ export default {
 </script>
  
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: all 0.4s;
+
+.bounce-enter-active {
+    animation: bounce-in 0.5s;
 }
 
-.fade-enter,
-.fade-leave-to {
-    opacity: 0;
+.bounce-leave-active {
+    animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 </style>
