@@ -4,7 +4,8 @@
     <Head title="Home" />
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
         <div>
-            <Result :showing="showResults" :personalityPercentages="personalityPercentages" :personalityType="personalityType" @close="showResults = false"/>
+            <Result :showing="showResults" :personalityPercentages="personalityPercentages"
+                :personalityType="personalityType" @close="showResults = false" />
         </div>
         <div class="m-auto_ p-8 flex flex-col items-center">
             <div class="p-4 w-full flex justify-end">
@@ -27,8 +28,8 @@
                 <div v-if="nextQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
                     Next
                 </div>
-                <div v-else class="px-4 py-2 bg-blue-100 rounded-lg" @click="submit">
-                    Submit
+                <div v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
+                    Next
                 </div>
             </div>
         </div>
@@ -96,6 +97,14 @@ export default {
             this.nullSelectedOption()
             // console.log(this.questions)
         },
+        canSubmit() {
+            return this.questions.every(checkOptionsSelected)
+
+            function checkOptionsSelected(question) {
+                return (question.selectedOption !== null && !isNaN(question.selectedOption));
+            }
+
+        },
         selectOption(questionIndex, answerIndex) {
             return this.questions[questionIndex].selectedOption = this.questions[questionIndex].selectedOption === answerIndex ? null : answerIndex;
         },
@@ -124,12 +133,8 @@ export default {
             this.showCurrentQuestion()
         },
         submit() {
-            var allFilled = this.questions.every(checkOptionsSelected)
-
-            function checkOptionsSelected(question) {
-                return (question.selectedOption !== null && !isNaN(question.selectedOption));
-            }
-
+            var allFilled = this.canSubmit()
+            
             if(!allFilled) {
                 alert("Please fill all options")
             } else {
