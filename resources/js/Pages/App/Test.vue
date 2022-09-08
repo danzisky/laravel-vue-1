@@ -1,10 +1,10 @@
 <template>
-    <Base>
-
-    <Head title="Home" />
+    <!-- <Base> -->
+<Head title="Home" />
+<keep-alive>
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
         <div class="z-10">
-            <div v-if="showResults" class="absolute w-full h-screen top-0 right-0 bg-gray-600 opacity-70 transition delay-75"></div>
+            <div v-if="showResults" class="absolute w-full h-screen top-0 right-0 bg-gray-600 opacity-70 transition-all duration-500"></div>
             <Result :showing="showResults" :personalityPercentages="personalityPercentages"
                 :personalityType="personalityType" @close="showResults = false" />
         </div>
@@ -34,11 +34,13 @@
                 </div>
             </div>
             <div class="flex justify-center space-x-4 m-2 p-4">
-                <SubmitButton :canSubmit="canSubmit == true" @submit="submit" />
+                <SubmitButton :buttonText="'Submit'" :canSubmit="canSubmit == true" @submit="submit" />
+                <SubmitButton :buttonText="'Start'" :canSubmit="true" @click="fetchData" />
             </div>
         </div>
     </div>
-    </Base>
+</keep-alive>
+    <!-- </Base> -->
 </template>
 <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script>
@@ -49,9 +51,20 @@ import QuestionCount from "./Components/questionCount.vue";
 import Result from "./Components/result.vue";
 import SubmitButton from "./Components/submitButton.vue";
 
+import { Inertia } from '@inertiajs/inertia'
+
+// Inertia.visit(route('test'), {
+//   only: ['users'],
+// })
+
 const QUESTIONS_URL = "http://127.0.0.1:8000/api/questions"
 
+
 export default {
+    layout: Base,
+    props: {
+        // serverQuestions: Object,
+    },
     data() {
         return {
             questions: [],
@@ -76,24 +89,62 @@ export default {
         personalityPercentages() {
             var result = this.result
             return {
-                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(2)*100,
+                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(3)*100,
 
-                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(2)*100,
+                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(3)*100,
             }
         }
     },
-
-    created() {
+    mounted() {
+        console.log("mounted")
+        console.log(this.here)
         this.currentQuestion = 0
-        this.fetchData()
+
+          
+        /* this.questions = (this.questions[0] ?? null == null ? this.serverQuestions : this.questions) ?? (this.serverQuestions ?? []) */
+        if((this.questions[0] ?? null) === null) {
+            this.fetchData()
+            console.log(this.questions)
+            console.log("new fetch")
+        } else if((this.questions[0] ?? null) !== null) {
+            this.showCurrentQuestion()
+            // this.nullSelectedOption()
+            console.log("no fetch")
+        }
+        console.log(this.questions)
+    },
+    created() {
+        console.log("created")
+        /* this.currentQuestion = 0
+        this.questions = this.serverQuestions ?? []
+
+        if((this.questions[0] ?? null) === null) {
+            this.fetchData()
+            console.log(this.questions)
+            console.log("new fetch")
+        } else if((this.questions[0] ?? null) !== null) {
+            this.showCurrentQuestion()
+            // this.nullSelectedOption()
+            console.log("no fetch")
+        }
+        console.log(this.questions) */
     },
 
     updated() {
         console.log("updated base")
     },
+    beforeUnmount() {
+        console.log("unmounting")
+        console.log(this.questions)
+    },
+    unmounted() {
+        console.log("unmounted")
+        console.log(this.questions)
+    },
     watch: {
         questions() {
             console.log("watch questions")
+
             return this.optionsFilled() ? this.canSubmit = true : false
         }
     },

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
+use App\Models\Question;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,8 +37,13 @@ Route::get('/test', function () {
     //     'laravelVersion' => Application::VERSION,
     //     'phpVersion' => PHP_VERSION,
     // ]);
+    $questions = Question::all();
+    foreach ($questions as $question) {
+        $question->answers;
+        // dump($question->answers);
+    }
     return Inertia::render('App/Test',[
-
+        // 'serverQuestions' => $questions,
     ]);
 })->name('test');
 

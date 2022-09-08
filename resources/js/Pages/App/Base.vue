@@ -56,7 +56,7 @@ const showingNavigationDropdown = ref(false);
             <!-- Page Content -->
             <main class="h-full">
                 <div class="m-auto w-full h-full bg-slate-300_">
-                    <slot />
+                    <slot :mess="here" />
                 </div>
             </main>
         </div>
@@ -65,7 +65,11 @@ const showingNavigationDropdown = ref(false);
 
 <script>
 export default {
-
+ data() {
+    return {
+        here: 'hereee',
+    }
+ }
 }
 </script>
 
