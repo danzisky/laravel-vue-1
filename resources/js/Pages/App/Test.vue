@@ -33,9 +33,10 @@
                     Next
                 </div>
             </div>
-            <div class="flex justify-center space-x-4 m-2 p-4">
+            <div class="w3-full border m-4"></div>
+            <div class="flex justify-center space-x-4 mx-auto p-4_ bg">
+                <SubmitButton :buttonText="'Reset'" :canSubmit="true" @click="fetchData" />
                 <SubmitButton :buttonText="'Submit'" :canSubmit="canSubmit == true" @submit="submit" />
-                <SubmitButton :buttonText="'Start'" :canSubmit="true" @click="fetchData" />
             </div>
         </div>
     </div>
@@ -50,8 +51,6 @@ import Question from "./Components/question.vue";
 import QuestionCount from "./Components/questionCount.vue";
 import Result from "./Components/result.vue";
 import SubmitButton from "./Components/submitButton.vue";
-
-import { Inertia } from '@inertiajs/inertia'
 
 // Inertia.visit(route('test'), {
 //   only: ['users'],
@@ -109,7 +108,7 @@ export default {
         } else if((this.questions[0] ?? null) !== null) {
             this.showCurrentQuestion()
             // this.nullSelectedOption()
-            console.log("no fetch")
+            // console.log("no fetch")
         }
         console.log(this.questions)
     },
@@ -151,6 +150,7 @@ export default {
     
     methods: {
         async fetchData() {
+            this.canSubmit = false
             var questions = await (await fetch(QUESTIONS_URL)).json();
 
             questions = questions.data ? questions.data : []
