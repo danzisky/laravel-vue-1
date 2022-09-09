@@ -5,7 +5,7 @@
             <div class="">
                 <div class="flex p-4 bg-blue-400 rounded-lg text-white text-lg">
                     <div class="px-3 w-max font-bold mr-2">
-                        Q
+                        Q{{ questionIndex+1 }}.
                     </div>
                     <div>
                         {{ question.question }}
