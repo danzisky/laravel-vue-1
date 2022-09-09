@@ -35,7 +35,7 @@
             </div>
             <div class="w3-full border m-4"></div>
             <div class="flex justify-center space-x-4 mx-auto p-4_ bg">
-                <SubmitButton :buttonText="'Reset'" :canSubmit="true" @click="fetchData" />
+                <SubmitButton :buttonText="'Reset'" :canSubmit="true" @click="reset" />
                 <SubmitButton :buttonText="'Submit'" :canSubmit="canSubmit == true" @submit="submit" />
             </div>
         </div>
@@ -200,6 +200,11 @@ export default {
         previousQuestion(event) {
             this.currentQuestion--
             this.showCurrentQuestion()
+        },
+        reset() {
+            this.fetchData()
+            this.canSubmit = false
+            this.currentQuestion = 0
         },
         submit() {
             var allFilled = this.optionsFilled()

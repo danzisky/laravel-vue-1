@@ -1,7 +1,6 @@
 <template>
     <Transition name="bounce">
         <div v-if="question.isCurrent" class="p-4 bg-gray-200 rounded-lg" >
-            <!-- :class="[question.isCurrent ? 'transition ease-linear ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300' : '', ]" -->
             <div class="">
                 <div class="flex p-4 bg-blue-400 rounded-lg text-white text-lg">
                     <div class="px-3 w-max font-bold mr-2">
@@ -37,11 +36,9 @@ export default {
     },
     created() {
         this.answers = this.question.answers ?? []
-        // console.log(this.question.selectedOption)
-        // console.log(this.answers)
     },
     updated() {
-        console.log('updated question')
+        console.log('updated question component')
     },
     components: {
         Answer
