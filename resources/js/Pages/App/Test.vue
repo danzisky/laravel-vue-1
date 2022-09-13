@@ -144,7 +144,7 @@ export default {
         async fetchData() {
             this.canSubmit = false
             var questions = await (await fetch(QUESTIONS_URL)).json();
-
+            console.log(questions)
             questions = questions.data ? questions.data : []
             
             this.questions = questions
