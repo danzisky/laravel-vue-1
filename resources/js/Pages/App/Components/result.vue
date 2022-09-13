@@ -10,9 +10,9 @@
                 </button>
                 <div>
                     <h2 class="text-xl font-bold text-gray-900">Personality Type</h2>
-                    <p class="mb-1">Your answers are {{ personalityPercentages.introvertScore }}%
+                    <p class="mb-1">Your answers are {{ personalityPercentages.introvertScore.toFixed(2) }}%
                         introverted and {{
-                        personalityPercentages.extrovertScore }}% extroverted
+                        personalityPercentages.extrovertScore.toFixed(2) }}% extroverted
                     </p>
                     <p class="mb-6 text-lg font-bold animate-pulse">
                         You are an {{ personalityType }}!
