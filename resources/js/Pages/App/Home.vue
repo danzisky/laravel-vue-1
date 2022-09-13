@@ -1,6 +1,4 @@
 <template>
-    <!-- <Base> -->
-
     <Head title="Home" />
     <div class="grid grid-cols-1 place-content-center h-screen">
         <div class="m-auto p-16 flex flex-col items-center">
@@ -22,7 +20,6 @@
             </div>
         </div>
     </div>
-    <!-- </Base> -->
 </template>
 
 <script>

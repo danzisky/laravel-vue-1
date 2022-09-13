@@ -1,7 +1,5 @@
 <template>
-    <!-- <Base> -->
 <Head title="Home" />
-<keep-alive>
     <div class="grid grid-cols-1 place-content-center text-blue-400 font-semibold_">
         <div class="z-10">
             <div v-if="showResults" class="absolute w-full h-screen top-0 right-0 bg-gray-600 opacity-70 transition-all duration-500"></div>
@@ -40,8 +38,6 @@
             </div>
         </div>
     </div>
-</keep-alive>
-    <!-- </Base> -->
 </template>
 <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script>
@@ -99,16 +95,12 @@ export default {
         console.log(this.here)
         this.currentQuestion = 0
 
-          
-        /* this.questions = (this.questions[0] ?? null == null ? this.serverQuestions : this.questions) ?? (this.serverQuestions ?? []) */
         if((this.questions[0] ?? null) === null) {
             this.fetchData()
             console.log(this.questions)
             console.log("new fetch")
         } else if((this.questions[0] ?? null) !== null) {
             this.showCurrentQuestion()
-            // this.nullSelectedOption()
-            // console.log("no fetch")
         }
         console.log(this.questions)
     },
@@ -158,7 +150,6 @@ export default {
             this.questions = questions
             this.showCurrentQuestion()
             this.nullSelectedOption()
-            // console.log(this.questions)
         },
         optionsFilled() {
             return this.questions.every(checkOptionsSelected)
@@ -178,7 +169,6 @@ export default {
             return
         },
         showCurrentQuestion() {
-            // console.log(this.currentQuestion)
             this.questions.forEach((question, index) => {
                 return question.isCurrent = index == this.currentQuestion ? true : false
             })
@@ -186,12 +176,9 @@ export default {
             this.previousQuestionAvailable = (this.questions.length >= this.currentQuestion && this.currentQuestion >= 1) ? true : false
         },
         nullSelectedOption() {
-            // console.log('nulling selected')
             this.questions.forEach((question, index) => {
                 return question.selectedOption =  null
             })
-            // console.log(this.questions.length)
-            // console.log('nulled selected')
         },
         nextQuestion(event) {
             this.currentQuestion++
@@ -202,9 +189,9 @@ export default {
             this.showCurrentQuestion()
         },
         reset() {
+            this.currentQuestion = 0
             this.fetchData()
             this.canSubmit = false
-            this.currentQuestion = 0
         },
         submit() {
             var allFilled = this.optionsFilled()
@@ -212,7 +199,6 @@ export default {
             if(!allFilled) {
                 alert("Please fill all options")
             } else {
-                // alert("submitting")
                 console.log("submitting")
                 const RESULT = this.questions.map((question) => {
                     console.log(question.selectedOption)
