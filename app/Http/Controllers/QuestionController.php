@@ -6,6 +6,7 @@ use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -20,11 +21,15 @@ class QuestionController extends Controller
         return QuestionResource::collection(Question::all());
     }
 
-    public function deductPersonality(Request $request) {
+    public function deducePersonality(Request $request) {
         // dd($request->testResponse);
         define('maxAnswerRank', 4);
         define('minAnswerRank', 1);
         $testResponse = collect($request->testResponse) ?? [];
+
+        if(empty($testResponse)) {
+            return Response::denyWithStatus(404);
+        }
 
         $extrovertScore = 0;
         $introvertScore = 0;
@@ -38,8 +43,8 @@ class QuestionController extends Controller
         // for a more practical formmula
 
         $totalQuestions = 0;
-        $totalScore = 0;
-        $totalScoreInt = 0;
+        $totalScoreExtrovert = 0;
+        $totalScoreIntrovert = 0;
         foreach ($testResponse as $response) {
             // given the answers are for evenly increasing levels of personality difference from one extreme to the other
 
@@ -47,14 +52,18 @@ class QuestionController extends Controller
             // the multiplicaion of the ration by 4 is to have it back on the scale
 
             $responseRank = $response['answer_rank'] - 1;
-            $totalScore += ($response['peak_personality'] == "extrovert" ? $responseRank : 3 - $responseRank)/3 *4;
-            $totalScoreInt += ($response['peak_personality'] == "extrovert" ? 3 - $responseRank : $responseRank)/3 * 4;
+            $totalScoreExtrovert += ($response['peak_personality'] == "extrovert" ? $responseRank : 3 - $responseRank)/3 *4;
+            $totalScoreIntrovert += ($response['peak_personality'] == "extrovert" ? 3 - $responseRank : $responseRank)/3 * 4;
 
             $totalQuestions++;
         }
 
-        $extrovertedness = $totalScore/($totalQuestions * 4);
-        $introvertedness = $totalScoreInt/($totalQuestions * 4);
+        if($totalQuestions == 0) {
+            return Response::denyWithStatus(404);
+        }
+
+        $extrovertedness = $totalScoreExtrovert/($totalQuestions * 4);
+        $introvertedness = $totalScoreIntrovert/($totalQuestions * 4);
         
         $netScore = $extrovertedness - $introvertedness;
         
@@ -64,10 +73,8 @@ class QuestionController extends Controller
         $personalityResponse = [
             'netScore' => $netScore,
             'totalQuestions' => $totalQuestions,
-            'totalScoreInt' => $totalScoreInt,
-            'totalScore' => $totalScore,
-            'extrovertedness' => $extrovertedness,
-            'introvertedness' => $introvertedness,
+            'totalScoreIntrovert' => $totalScoreIntrovert,
+            'totalScoreExtrovert' => $totalScoreExtrovert,
             'introvertScore' => $introvertScore,
             'extrovertScore' => $extrovertScore,
         ];

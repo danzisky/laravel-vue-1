@@ -64,5 +64,16 @@ class ResourceTest extends TestCase
             )
         );
     }
+    public function test_api_response_results_endpoint()
+    {
+        $this->seed();
+        $response = $this->postJson('/api/result');
+
+        $response->assertJson(fn (AssertableJson $json) =>
+            $json->has('message')
+            ->where('allowed', false)
+            ->etc()
+        );
+    }
     
 }

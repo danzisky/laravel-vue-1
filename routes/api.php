@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('questions', QuestionController::class);
-Route::post('result', [QuestionController::class, 'deductPersonality'])->name('result');
+Route::post('result', [QuestionController::class, 'deducePersonality'])->name('result');
 Route::resource('answers', AnswerController::class);
