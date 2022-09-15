@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 border-2 border-blue-300_ rounded-lg bg-gray-100" :class="[selected ? 'border-blue-400' : '', ]">
+    <div class="p-4 border-2 border-blue-300_ rounded-lg bg-gray-100 shadow-lg" :class="[selected ? 'border-blue-400' : '', ]">
         <div>
             <div class="flex">
                 <div class="py-2_ px-3 w-max font-bold border-2_ border-blue-400_ text-white_ rounded-lg_ mr-2">

@@ -17,19 +17,19 @@
         </div>
         <div class="m-auto_ p-2 sm:p-8 ">
             <div class="flex justify-center space-x-4">
-                <div v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg"
+                <button v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 hover:text-white hover:bg-blue-300 rounded-lg"
                     @click="previousQuestion">
                     Previous
-                </div>
-                <div v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
+                </button>
+                <button v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
                     Previous
-                </div>
-                <div v-if="nextQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg" @click="nextQuestion">
+                </button>
+                <button v-if="nextQuestionAvailable" class="px-4 py-2 bg-blue-100 hover:text-white hover:bg-blue-300 rounded-lg" @click="nextQuestion">
                     Next
-                </div>
-                <div v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
+                </button>
+                <button v-else class="px-4 py-2 bg-gray-200 text-gray-300 rounded-lg">
                     Next
-                </div>
+                </button>
             </div>
             <div class="w3-full border m-4"></div>
             <div class="flex justify-center space-x-4 mx-auto p-4_ bg">
