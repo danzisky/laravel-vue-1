@@ -10,7 +10,7 @@
                         {{ question.question }}
                     </div>
                 </div>
-                <div class="m-auto p-8 flex flex-col space-y-4">
+                <div class="m-auto py-4 px-2 sm:p-8 flex flex-col space-y-4">
                     <div class="space-y-4">
                         <Answer v-for="(answer, index) in answers" :key="answer.id" :answer="answer"
                             :selectedOption="question.selectedOption" :index="index"

@@ -6,16 +6,16 @@
             <Result :showing="showResults" :personalityPercentages="personalityPercentages"
                 :personalityType="personalityType" @close="showResults = false" />
         </div>
-        <div class="m-auto_ p-8 flex flex-col items-center">
+        <div class="m-auto_ sm:p-8 flex flex-col items-center">
             <div class="p-4 w-full flex justify-end">
                 <QuestionCount :questionsLength="questions.length" :currentQuestion="currentQuestion" />
             </div>
-            <div class="p-4">
+            <div class="p-1 sm:p-4">
                 <Question v-for="(question, index) in questions" :key="question.id" :question="question"
                     :questionIndex="index" @select-option="selectOption" />
             </div>
         </div>
-        <div class="m-auto_ p-8 ">
+        <div class="m-auto_ p-2 sm:p-8 ">
             <div class="flex justify-center space-x-4">
                 <div v-if="previousQuestionAvailable" class="px-4 py-2 bg-blue-100 rounded-lg"
                     @click="previousQuestion">

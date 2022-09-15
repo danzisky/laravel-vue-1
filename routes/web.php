@@ -31,16 +31,9 @@ Route::get('/', function () {
 })->name('base');
 
 Route::get('/test', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
     $questions = Question::all();
     foreach ($questions as $question) {
         $question->answers;
-        // dump($question->answers);
     }
     return Inertia::render('App/Test',[
         // 'serverQuestions' => $questions,
@@ -48,7 +41,6 @@ Route::get('/test', function () {
 })->name('test');
 
 Route::resource('questions', QuestionController::class);
-Route::resource('questions.answers', AnswerController::class);
 
 Route::get('/home', function () {
     return Inertia::render('App/Home');
