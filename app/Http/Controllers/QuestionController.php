@@ -23,8 +23,8 @@ class QuestionController extends Controller
 
     public function deducePersonality(Request $request) {
         // dd($request->testResponse);
-        define('maxAnswerRank', 4);
-        define('minAnswerRank', 1);
+        // define('maxAnswerRank', 4);
+        // define('minAnswerRank', 1);
         $testResponse = collect($request->testResponse) ?? [];
 
         if(empty($testResponse)) {
@@ -71,12 +71,12 @@ class QuestionController extends Controller
         $extrovertScore = $extrovertedness;
 
         $personalityResponse = [
-            'netScore' => $netScore,
-            'totalQuestions' => $totalQuestions,
-            'totalScoreIntrovert' => $totalScoreIntrovert,
-            'totalScoreExtrovert' => $totalScoreExtrovert,
-            'introvertScore' => $introvertScore,
-            'extrovertScore' => $extrovertScore,
+            'netScore' => round($netScore, 2),
+            'totalQuestions' => round($totalQuestions, 2),
+            'totalScoreIntrovert' => round($totalScoreIntrovert, 2),
+            'totalScoreExtrovert' => round($totalScoreExtrovert, 2),
+            'introvertScore' => round($introvertScore, 2),
+            'extrovertScore' => round($extrovertScore, 2),
         ];
         $personalityResponse = collect($personalityResponse);
         return $personalityResponse->toJson();
