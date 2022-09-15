@@ -92,33 +92,19 @@ export default {
     },
     mounted() {
         console.log("mounted")
-        console.log(this.here)
         this.currentQuestion = 0
 
         if((this.questions[0] ?? null) === null) {
             this.fetchData()
-            console.log(this.questions)
+            // console.log(this.questions)
             console.log("new fetch")
         } else if((this.questions[0] ?? null) !== null) {
             this.showCurrentQuestion()
         }
-        console.log(this.questions)
+        // console.log(this.questions)
     },
     created() {
         console.log("created")
-        /* this.currentQuestion = 0
-        this.questions = this.serverQuestions ?? []
-
-        if((this.questions[0] ?? null) === null) {
-            this.fetchData()
-            console.log(this.questions)
-            console.log("new fetch")
-        } else if((this.questions[0] ?? null) !== null) {
-            this.showCurrentQuestion()
-            // this.nullSelectedOption()
-            console.log("no fetch")
-        }
-        console.log(this.questions) */
     },
 
     updated() {
@@ -201,7 +187,7 @@ export default {
             } else {
                 console.log("submitting")
                 const RESULT = this.questions.map((question) => {
-                    console.log(question.selectedOption)
+                    // console.log(question.selectedOption)
                     return {
                         question_id: question.id,
                         anchor_rank: question.anchor_rank,
