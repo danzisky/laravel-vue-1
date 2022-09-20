@@ -7,14 +7,14 @@ use App\Http\Resources\QuestionResource;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class AppController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function questions()
     {
         return QuestionResource::collection(Question::all());
     }

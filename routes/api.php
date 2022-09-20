@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\AppController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('questions', QuestionController::class);
-Route::post('result', [QuestionController::class, 'deducePersonality'])->name('result');
-Route::resource('answers', AnswerController::class);
+Route::get('questions', [AppController::class, 'questions'])->name('questions');
+Route::post('result', [AppController::class, 'deducePersonality'])->name('result');
