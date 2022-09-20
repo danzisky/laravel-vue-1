@@ -179,7 +179,6 @@ export default {
             }
 
             var res = await axios.post(RESULT_URL, resultRequest)
-            // console.log(res.data)
 
             if(res.data) {
                 this.showResults = true
