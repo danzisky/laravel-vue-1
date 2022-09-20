@@ -92,12 +92,6 @@ export default {
             this.showCurrentQuestion()
         }
     },
-    beforeUnmount() {
-        console.log("unmounting")
-    },
-    unmounted() {
-        console.log("unmounted")
-    },
     watch: {
         questions() {
             return this.optionsFilled() ? this.canSubmit = true : false
