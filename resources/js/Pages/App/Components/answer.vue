@@ -30,11 +30,7 @@ export default {
         this.letter = this.option(this.index);
         this.isSelected()
     },
-    beforeUpdate() {
-        this.isSelected()
-    },
     updated() {
-        console.log('updated answer')
         this.isSelected()
     },
     methods: {

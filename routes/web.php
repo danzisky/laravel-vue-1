@@ -19,28 +19,13 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
-    return Inertia::render('App/Home',[
-
-    ]);
+    return Inertia::render('App/Home',[]);
 })->name('base');
 
 Route::get('/test', function () {
-    $questions = Question::all();
-    foreach ($questions as $question) {
-        $question->answers;
-    }
-    return Inertia::render('App/Test',[
-        // 'serverQuestions' => $questions,
-    ]);
+    
+    return Inertia::render('App/Test',[]);
 })->name('test');
-
-Route::resource('questions', QuestionController::class);
 
 Route::get('/home', function () {
     return Inertia::render('App/Home');

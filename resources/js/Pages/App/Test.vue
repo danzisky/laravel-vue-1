@@ -39,27 +39,20 @@
         </div>
     </div>
 </template>
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 <script>
 import Base from "./Base.vue";
 import { Head } from "@inertiajs/inertia-vue3";
-import Question from "./Components/question.vue";
-import QuestionCount from "./Components/questionCount.vue";
-import Result from "./Components/result.vue";
+import Question from "./Components/Question.vue";
+import QuestionCount from "./Components/QuestionCount.vue";
+import Result from "./Components/Result.vue";
 import SubmitButton from "./Components/submitButton.vue";
 
-// Inertia.visit(route('test'), {
-//   only: ['users'],
-// })
 
 const QUESTIONS_URL = "http://127.0.0.1:8000/api/questions"
 
 
 export default {
     layout: Base,
-    props: {
-        // serverQuestions: Object,
-    },
     data() {
         return {
             questions: [],
@@ -91,37 +84,22 @@ export default {
         }
     },
     mounted() {
-        console.log("mounted")
         this.currentQuestion = 0
 
         if((this.questions[0] ?? null) === null) {
             this.fetchData()
-            // console.log(this.questions)
-            console.log("new fetch")
         } else if((this.questions[0] ?? null) !== null) {
             this.showCurrentQuestion()
         }
-        // console.log(this.questions)
-    },
-    created() {
-        console.log("created")
-    },
-
-    updated() {
-        console.log("updated base")
     },
     beforeUnmount() {
         console.log("unmounting")
-        console.log(this.questions)
     },
     unmounted() {
         console.log("unmounted")
-        console.log(this.questions)
     },
     watch: {
         questions() {
-            console.log("watch questions")
-
             return this.optionsFilled() ? this.canSubmit = true : false
         }
     },
@@ -141,7 +119,6 @@ export default {
             return this.questions.every(checkOptionsSelected)
 
             function checkOptionsSelected(question) {
-                console.log(question.selectedOption)
                 return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
             }
 
@@ -187,7 +164,6 @@ export default {
             } else {
                 console.log("submitting")
                 const RESULT = this.questions.map((question) => {
-                    // console.log(question.selectedOption)
                     return {
                         question_id: question.id,
                         anchor_rank: question.anchor_rank,
@@ -197,10 +173,7 @@ export default {
                     }
                 })
                 var scores = this.getPersonalityScores(RESULT)
-                console.log(scores)
-                /* if(scores.includes('data')) {
-                    this.showResults = true
-                } */
+                // console.log(scores)
             }
 
 
@@ -210,9 +183,9 @@ export default {
             var resultRequest = {
                 testResponse: RESULT
             }
-            console.log(resultRequest)
+
             var res = await axios.post(RESULT_URL, resultRequest)
-            console.log(res.data)
+            // console.log(res.data)
 
             if(res.data) {
                 this.showResults = true
@@ -222,13 +195,13 @@ export default {
         },
     },
     components: {
-    Head,
-    Base,
-    Question,
-    QuestionCount,
-    Result,
-    SubmitButton
-}
+        Head,
+        Base,
+        Question,
+        QuestionCount,
+        Result,
+        SubmitButton
+    }
 }
 
 </script>

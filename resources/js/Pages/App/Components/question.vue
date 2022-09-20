@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Answer from "./answer.vue"
+import Answer from "./Answer.vue"
 export default {
     props: {
         question: Object,
@@ -36,9 +36,6 @@ export default {
     },
     created() {
         this.answers = this.question.answers ?? []
-    },
-    updated() {
-        console.log('updated question component')
     },
     components: {
         Answer
