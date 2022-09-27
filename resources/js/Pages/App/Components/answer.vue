@@ -16,8 +16,14 @@
 <script>
 export default {
     props: {
-        answer: Object,
-        index: Number,
+        answer: {
+            required: true,
+            type: Object,
+        },
+        index: {
+            required: true,
+            type: Number,
+        },
         selectedOption: Number,
     },
     data() {
@@ -38,6 +44,11 @@ export default {
             const BASE_LETTER = 'A';
             return String.fromCharCode(BASE_LETTER.charCodeAt(0) + increment);
         },
+        isSelected() {
+            this.selected = this.selectedOption === this.index ? true : false
+        }
+    },
+    computed: {
         isSelected() {
             this.selected = this.selectedOption === this.index ? true : false
         }

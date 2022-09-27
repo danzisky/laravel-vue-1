@@ -26,8 +26,14 @@
 import Answer from "./Answer.vue"
 export default {
     props: {
-        question: Object,
-        questionIndex: Number,
+        question: {
+            required: true,
+            type: Object,
+        },
+        questionIndex: {
+            required: true,
+            type: Number,
+        },
     },
     data() {
         return {
