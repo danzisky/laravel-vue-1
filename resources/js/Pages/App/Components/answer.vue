@@ -1,9 +1,9 @@
 <template>
-    <div class="p-4 border-2 border-blue-300_ rounded-lg bg-gray-100 shadow-lg" :class="[selected ? 'border-blue-400' : '', ]">
+    <div class="p-4 border-2 border-blue-300_ rounded-lg bg-gray-100 shadow-lg" :class="[isSelected ? 'border-blue-400' : '', ]">
         <div>
             <div class="flex">
                 <div class="py-2_ px-3 w-max font-bold border-2_ border-blue-400_ text-white_ rounded-lg_ mr-2">
-                    {{ letter }}
+                    {{ option }}
                 </div>
                 <div>
                     {{ answer.answer }}
@@ -26,28 +26,13 @@ export default {
         },
         selectedOption: Number,
     },
-    data() {
-        return {
-            letter: null,
-            selected: false,
-        }
-    },
-    mounted() {
-        this.letter = this.option(this.index);
-        this.isSelected
-    },
-    updated() {
-        this.isSelected
-    },
-    methods: {
-        option(increment) {
-            const BASE_LETTER = 'A';
-            return String.fromCharCode(BASE_LETTER.charCodeAt(0) + increment);
-        },
-    },
     computed: {
         isSelected() {
-            this.selected = this.selectedOption === this.index ? true : false
+            return this.selectedOption === this.index ? true : false
+        },
+        option() {
+            const BASE_LETTER = 'A';
+            return String.fromCharCode(BASE_LETTER.charCodeAt(0) + this.index);
         }
     }
 }
