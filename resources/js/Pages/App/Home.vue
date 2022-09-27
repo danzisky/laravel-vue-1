@@ -28,7 +28,7 @@
 import Base from "./Base.vue"
 import { Head } from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3';
-import SubmitButton from "./Components/submitButton.vue";
+import SubmitButton from "./Components/SubmitButton.vue";
 import NavLink from "../../Components/NavLink.vue";
 
 export default {

@@ -45,7 +45,7 @@ import { Head } from "@inertiajs/inertia-vue3";
 import Question from "./Components/Question.vue";
 import QuestionCount from "./Components/QuestionCount.vue";
 import Result from "./Components/Result.vue";
-import SubmitButton from "./Components/submitButton.vue";
+import SubmitButton from "./Components/SubmitButton.vue";
 
 
 const QUESTIONS_URL = "http://127.0.0.1:8000/api/questions"
@@ -63,25 +63,6 @@ export default {
             canSubmit: false,
             result: [],
         };
-    },
-    computed: {
-        personalityType() {
-            if(this.result.extrovertScore > this.result.introvertScore) {
-                return "Extrovert"
-            } else if(this.result.introvertScore > this.result.extrovertScore) {
-                return "Introvert"
-            } else {
-                return "Ambivert"
-            }
-        },
-        personalityPercentages() {
-            var result = this.result
-            return {
-                introvertScore: (this.result.introvertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(3)*100,
-
-                extrovertScore: (this.result.extrovertScore/(this.result.introvertScore+this.result.extrovertScore)).toFixed(3)*100,
-            }
-        }
     },
     mounted() {
         this.currentQuestion = 0
@@ -108,14 +89,6 @@ export default {
             this.questions = questions
             this.showCurrentQuestion()
             this.nullSelectedOption()
-        },
-        optionsFilled() {
-            return this.questions.every(checkOptionsSelected)
-
-            function checkOptionsSelected(question) {
-                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
-            }
-
         },
         selectOption(questionIndex, answerIndex) {
             
@@ -185,6 +158,33 @@ export default {
                 this.result = res.data
             }
             return res
+        },
+    },
+    computed: {
+        personalityType() {
+            if (this.result.extrovertScore > this.result.introvertScore) {
+                return "Extrovert"
+            } else if (this.result.introvertScore > this.result.extrovertScore) {
+                return "Introvert"
+            } else {
+                return "Ambivert"
+            }
+        },
+        personalityPercentages() {
+            var result = this.result
+            return {
+                introvertScore: (this.result.introvertScore / (this.result.introvertScore + this.result.extrovertScore)).toFixed(3) * 100,
+
+                extrovertScore: (this.result.extrovertScore / (this.result.introvertScore + this.result.extrovertScore)).toFixed(3) * 100,
+            }
+        },
+        optionsFilled() {
+            return this.questions.every(checkOptionsSelected)
+
+            function checkOptionsSelected(question) {
+                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
+            }
+
         },
     },
     components: {
