@@ -98,6 +98,14 @@ export default {
             
             return
         },
+        optionsFilled() {
+            return this.questions.every(checkOptionsSelected)
+
+            function checkOptionsSelected(question) {
+                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
+            }
+
+        },
         showCurrentQuestion() {
             this.questions.forEach((question, index) => {
                 return question.isCurrent = index == this.currentQuestion ? true : false
@@ -177,14 +185,6 @@ export default {
 
                 extrovertScore: (this.result.extrovertScore / (this.result.introvertScore + this.result.extrovertScore)).toFixed(3) * 100,
             }
-        },
-        optionsFilled() {
-            return this.questions.every(checkOptionsSelected)
-
-            function checkOptionsSelected(question) {
-                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
-            }
-
         },
     },
     components: {

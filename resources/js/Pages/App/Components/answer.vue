@@ -47,11 +47,6 @@ export default {
         isSelected() {
             this.selected = this.selectedOption === this.index ? true : false
         }
-    },
-    computed: {
-        isSelected() {
-            this.selected = this.selectedOption === this.index ? true : false
-        }
     }
 }
 </script>
