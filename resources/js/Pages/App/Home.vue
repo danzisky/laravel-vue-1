@@ -3,7 +3,6 @@
     <div class="grid grid-cols-1 place-content-center h-screen">
         <div class="m-auto px-16 py-8 flex flex-col items-center text-2xl bg-slate-200 rounded-lg shadow-2xl">
             <div class="uppercase font-mono_ font-semibold text-gray-500">
-
                 <p>
                     Welcome,
                 </p>
