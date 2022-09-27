@@ -82,7 +82,7 @@ export default {
     methods: {
         async fetchData() {
             this.canSubmit = false
-            var questions = await (await fetch(QUESTIONS_URL)).json();
+            let questions = await (await fetch(QUESTIONS_URL)).json();
             console.log(questions)
             questions = questions.data ? questions.data : []
             
@@ -124,7 +124,7 @@ export default {
             this.canSubmit = false
         },
         submit() {
-            var allFilled = this.optionsFilled
+            const allFilled = this.optionsFilled
             
             if(!allFilled) {
                 alert("Please fill all options")
@@ -139,19 +139,18 @@ export default {
                         answer_rank: question.answers[question.selectedOption].rank,
                     }
                 })
-                var scores = this.getPersonalityScores(RESULT)
-                // console.log(scores)
+                const scores = this.getPersonalityScores(RESULT)
             }
 
 
         },
         async getPersonalityScores(RESULT) {
             const RESULT_URL = "http://127.0.0.1:8000/api/result"
-            var resultRequest = {
+            const resultRequest = {
                 testResponse: RESULT
             }
 
-            var res = await axios.post(RESULT_URL, resultRequest)
+            const res = await axios.post(RESULT_URL, resultRequest)
 
             if(res.data) {
                 this.showResults = true
@@ -171,7 +170,7 @@ export default {
             }
         },
         personalityPercentages() {
-            var result = this.result
+            const result = this.result
             return {
                 introvertScore: (this.result.introvertScore / (this.result.introvertScore + this.result.extrovertScore)).toFixed(3) * 100,
 
