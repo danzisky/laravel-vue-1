@@ -75,7 +75,7 @@ export default {
     },
     watch: {
         questions() {
-            return this.optionsFilled() ? this.canSubmit = true : false
+            return this.optionsFilled ? this.canSubmit = true : false
         }
     },
     
@@ -94,17 +94,9 @@ export default {
             
             this.questions[questionIndex].selectedOption = this.questions[questionIndex].selectedOption === answerIndex ? null : answerIndex;
             
-            this.canSubmit = this.optionsFilled() ? true : false
+            this.canSubmit = this.optionsFilled ? true : false
             
             return
-        },
-        optionsFilled() {
-            return this.questions.every(checkOptionsSelected)
-
-            function checkOptionsSelected(question) {
-                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
-            }
-
         },
         showCurrentQuestion() {
             this.questions.forEach((question, index) => {
@@ -132,7 +124,7 @@ export default {
             this.canSubmit = false
         },
         submit() {
-            var allFilled = this.optionsFilled()
+            var allFilled = this.optionsFilled
             
             if(!allFilled) {
                 alert("Please fill all options")
@@ -185,6 +177,14 @@ export default {
 
                 extrovertScore: (this.result.extrovertScore / (this.result.introvertScore + this.result.extrovertScore)).toFixed(3) * 100,
             }
+        },
+        optionsFilled() {
+            return this.questions.every(checkOptionsSelected)
+
+            function checkOptionsSelected(question) {
+                return ((question.selectedOption ?? null) !== null && !isNaN(question.selectedOption));
+            }
+
         },
     },
     components: {

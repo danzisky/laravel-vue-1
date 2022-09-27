@@ -34,16 +34,18 @@ export default {
     },
     mounted() {
         this.letter = this.option(this.index);
-        this.isSelected()
+        this.isSelected
     },
     updated() {
-        this.isSelected()
+        this.isSelected
     },
     methods: {
         option(increment) {
             const BASE_LETTER = 'A';
             return String.fromCharCode(BASE_LETTER.charCodeAt(0) + increment);
         },
+    },
+    computed: {
         isSelected() {
             this.selected = this.selectedOption === this.index ? true : false
         }
